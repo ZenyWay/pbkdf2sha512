@@ -1,5 +1,5 @@
 # pbkdf2-sha512 [![Join the chat at https://gitter.im/ZenyWay/pbkdf2-sha512](https://badges.gitter.im/ZenyWay/pbkdf2-sha512.svg)](https://gitter.im/ZenyWay/pbkdf2-sha512?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![NPM](https://nodei.co/npm/pbkdf2-sha512.png?compact=true)](https://nodei.co/npm/pbkdf2-sha512/)
+[![NPM](https://nodei.co/npm/pbkdf2sha512.png?compact=true)](https://nodei.co/npm/pbkdf2sha512/)
 [![build status](https://travis-ci.org/ZenyWay/pbkdf2-sha512.svg?branch=master)](https://travis-ci.org/ZenyWay/pbkdf2-sha512)
 [![coverage status](https://coveralls.io/repos/github/ZenyWay/pbkdf2-sha512/badge.svg?branch=master)](https://coveralls.io/github/ZenyWay/pbkdf2-sha512)
 [![Dependency Status](https://gemnasium.com/badges/github.com/ZenyWay/pbkdf2-sha512.svg)](https://gemnasium.com/github.com/ZenyWay/pbkdf2-sha512)
@@ -8,7 +8,7 @@ node crypto's async pbkdf2 promisified and with sane defaults.
 
 # <a name="example"></a> example
 ```ts
-import getPbkdf2OSha512 from 'pbkdf2-sha512'
+import getPbkdf2OSha512 from 'pbkdf2sha512'
 import debug = require('debug')
 debug.enable('example:*')
 

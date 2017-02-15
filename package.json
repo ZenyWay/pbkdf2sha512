@@ -1,5 +1,5 @@
 {
-  "name": "pbkdf2-sha512",
+  "name": "pbkdf2sha512",
   "version": "1.0.0",
   "description": "node crypto's async pbkdf2 promisified and with sane defaults",
   "main": "dist/index.js",
