@@ -141,6 +141,36 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
       }))
     })
   })
+  describe('when instantiated with `{ encoding: "none" }`', () => { // TODO
+    let config: any
+    let digests: any
+    beforeEach((done) => {
+      config = assign({
+        encoding: 'none'
+      }, mock)
+      const buf = Buffer.from('passphrase', 'ascii')
+      const arr = new Uint8Array(buf.buffer)
+      const args = [ 'passphrase', buf, arr ]
+      const pbkdf2 = getPbkdf2Sha512(config)
+      Promise.all(args.map(arg =>
+        pbkdf2(arg)))
+      .then(hashes => digests = hashes)
+      .then(() => setTimeout(done))
+      .catch(err => setTimeout(() => done.fail(err)))
+    })
+    it('returns the raw (Buffer) pbkdf2 digest of the given argument ' +
+    'together with the corresponding pbkdf2 parameters', () => {
+      mock.pbkdf2.calls.allArgs()
+      .every(args => expect(args[0].toString()).toBe('passphrase'))
+      digests.every((hash: any) => expect(hash.value).toEqual(digest)
+      && expect(hash.spec).toEqual({
+        encoding: 'none',
+        salt: randombytes.toString(),
+        iterations: 65536,
+        length: 64
+      }))
+    })
+  })
   describe('when called with anything else', () => { // TODO
     let config: any
     let errors: any

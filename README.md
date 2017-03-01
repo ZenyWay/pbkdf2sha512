@@ -27,7 +27,7 @@ const key = pbkdf2('secret passphrase')
 ```
 the files of this example are available [in this repository](./spec/example).
 
-view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.0.2/spec/example/index.html)
+view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.1.0/spec/example/index.html)
 in the browser console,
 or by cloning this repository and running the following commands from a terminal:
 ```bash
@@ -40,7 +40,7 @@ npm run example
 coded in `Typescript 2`, transpiled to `ES5`.
 
 for a detailed specification of the API,
-[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.0.2/spec/web/index.html).
+[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.1.0/spec/web/index.html).
 
 # <a name="contributing"></a> CONTRIBUTING
 see the [contribution guidelines](./CONTRIBUTING.md)
