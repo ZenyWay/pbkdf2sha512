@@ -14,16 +14,26 @@ debug.enable('example:*')
 
 const pbkdf2 = getPbkdf2OSha512({
   // generate random 64-byte long salt string, base64-encoded (default)
-  iterations: 16384, // min 8192, default 65536
-  length: 64 // min 32, max 64, default 64
+  iterations: 8192, // min 8192, default 65536
+  length: 32 // min 32, max 64, default 64
   // digest is always 'sha512'
+})
+
+const rawpbkdf2 = getPbkdf2OSha512({
+  encoding: 'none',
+  iterations: 8192,
+  length: 32
 })
 
 debug('example:')('digest passphrase...')
 
-const key = pbkdf2('secret passphrase')
+pbkdf2('secret passphrase')
 .then(debug('example:digest:'))
 // { value: "...", spec: { encoding: "base64", salt: "...", iterations: 16384, length: 64, hmac: "sha512" }}
+
+rawpbkdf2('secret passphrase')
+.then(debug('example:raw-digest:'))
+// { value: Buffer, spec: { encoding: "none", salt: Buffer, iterations: 8192, length: 32, hmac: "sha512" }}
 ```
 the files of this example are available [in this repository](./spec/example).
 
@@ -35,7 +45,7 @@ npm install
 npm run example
 ```
 
-# <a name="api"></a> API v1.0 stable
+# <a name="api"></a> API v1.1 stable
 `ES5` and [`Typescript`](http://www.typescriptlang.org/) compatible.
 coded in `Typescript 2`, transpiled to `ES5`.
 
