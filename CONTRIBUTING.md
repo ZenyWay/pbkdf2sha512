@@ -1,4 +1,4 @@
-# Contributing to module-name
+# Contributing to pbkdf2sha512
 
  - [Support enquiries](#support)
  - [Issues and Feature Requests](#issues)
@@ -7,11 +7,11 @@
 
 ## <a name="support"></a> Support enquiries
 Please address all support enquiries over the dedicated
-[module-name Gitter channel](https://gitter.im/ZenyWay/module-name).
+[pbkdf2sha512 Gitter channel](https://gitter.im/ZenyWay/pbkdf2sha512).
 
 ## <a name="issues"></a> Issues
 ### Security issues
-For the security of the community relying on module-name,
+For the security of the community relying on pbkdf2sha512,
 please report security issues _privately_ by email to
 [security@zenyway.com](mailto:security@zenyway.com).
 Please do not report security issues publicly.
@@ -24,8 +24,8 @@ public recognition for all contributions.
 
 ### Standard issues (not security relevant)
 Requests for new features and standard issues _that are not security relevant_
-are tracked as GitHub [issues in this repository](https://github.com/ZenyWay/module-name/issues):
-* please either [submit a new issue](https://github.com/ZenyWay/module-name/issues/new)
+are tracked as GitHub [issues in this repository](https://github.com/ZenyWay/pbkdf2sha512/issues):
+* please either [submit a new issue](https://github.com/ZenyWay/pbkdf2sha512/issues/new)
 after [checking](https://help.github.com/articles/using-search-to-filter-issues-and-pull-requests)
 that a similar feature request or issue has not already been submitted,
 * or subscribe to a related existing feature request or issue.
@@ -45,7 +45,7 @@ security-relevant or not:
 
 short description of feature request or issue
 
-**module-name version:** (only for issues) first version of module-name affected by the issue
+**pbkdf2sha512 version:** (only for issues) first version of pbkdf2sha512 affected by the issue
 
 **Environment:** (only for issues) Node and/or Browser, including user-agent version,
 in which the issue can be reproduced
@@ -96,10 +96,10 @@ clear code ownership is a necessary foundation
 for a trusted open source project.
 
 ### Pull-Request (PR) guidelines
-* a PR must close at least one [open issue](https://github.com/ZenyWay/module-nameg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen).
+* a PR must close at least one [open issue](https://github.com/ZenyWay/pbkdf2sha512g/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen).
 The corresponding issues should be listed in the title of the PR,
 e.g. "close #21, #42".
-* all PRs must pass the full module-name test suite and
+* all PRs must pass the full pbkdf2sha512 test suite and
 dedicated tests for the added or fixed features
 * all PRs must include the contributor's [detached signature](https://www.gnupg.org/gph/en/manual/x135.html)
 of the [Individual Contributor License Agreement](./ICLA),
@@ -109,7 +109,7 @@ As certified by my signature, attached to this Pull-Request,
 of the Individual Contributor License Agreement (ICLA),
 I submit this Contribution under the terms of the ICLA,
 which I fully approve and agree with, and a copy of which can be found at
-https://github.com/ZenyWay/module-name/blob/master/ICLA.
+https://github.com/ZenyWay/pbkdf2sha512/blob/master/ICLA.
 ```
 This is required both in the contributor's own interest,
 and that of the community relying on this project,
@@ -132,7 +132,7 @@ npm test
 ```
 
 #### CI
-CI testing runs on [TravisCI](https://travis-ci.org/ZenyWay/module-name).
+CI testing runs on [TravisCI](https://travis-ci.org/ZenyWay/pbkdf2sha512).
 
 #### test coverage reporting
 Test coverage reporting is produced with

@@ -1,8 +1,8 @@
-# pbkdf2-sha512 [![Join the chat at https://gitter.im/ZenyWay/pbkdf2-sha512](https://badges.gitter.im/ZenyWay/pbkdf2-sha512.svg)](https://gitter.im/ZenyWay/pbkdf2-sha512?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# pbkdf2sha512 [![Join the chat at https://gitter.im/ZenyWay/pbkdf2sha512](https://badges.gitter.im/ZenyWay/pbkdf2sha512.svg)](https://gitter.im/ZenyWay/pbkdf2sha512?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![NPM](https://nodei.co/npm/pbkdf2sha512.png?compact=true)](https://nodei.co/npm/pbkdf2sha512/)
-[![build status](https://travis-ci.org/ZenyWay/pbkdf2-sha512.svg?branch=master)](https://travis-ci.org/ZenyWay/pbkdf2-sha512)
-[![coverage status](https://coveralls.io/repos/github/ZenyWay/pbkdf2-sha512/badge.svg?branch=master)](https://coveralls.io/github/ZenyWay/pbkdf2-sha512)
-[![Dependency Status](https://gemnasium.com/badges/github.com/ZenyWay/pbkdf2-sha512.svg)](https://gemnasium.com/github.com/ZenyWay/pbkdf2-sha512)
+[![build status](https://travis-ci.org/ZenyWay/pbkdf2sha512.svg?branch=master)](https://travis-ci.org/ZenyWay/pbkdf2sha512)
+[![coverage status](https://coveralls.io/repos/github/ZenyWay/pbkdf2sha512/badge.svg?branch=master)](https://coveralls.io/github/ZenyWay/pbkdf2sha512)
+[![Dependency Status](https://gemnasium.com/badges/github.com/ZenyWay/pbkdf2sha512.svg)](https://gemnasium.com/github.com/ZenyWay/pbkdf2sha512)
 
 node crypto's async pbkdf2 promisified and with sane defaults.
 
@@ -37,7 +37,7 @@ rawpbkdf2('secret passphrase')
 ```
 the files of this example are available [in this repository](./spec/example).
 
-view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.1.0/spec/example/index.html)
+view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.1.0/spec/example/index.html)
 in the browser console,
 or by cloning this repository and running the following commands from a terminal:
 ```bash
@@ -50,7 +50,7 @@ npm run example
 coded in `Typescript 2`, transpiled to `ES5`.
 
 for a detailed specification of the API,
-[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2-sha512/v1.1.0/spec/web/index.html).
+[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.1.0/spec/web/index.html).
 
 # <a name="contributing"></a> CONTRIBUTING
 see the [contribution guidelines](./CONTRIBUTING.md)

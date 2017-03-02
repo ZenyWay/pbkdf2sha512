@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zenyway/pbkdf2-sha512.git"
+    "url": "git+https://github.com/zenyway/pbkdf2sha512.git"
   },
   "keywords": [
     "pbkdf2",
@@ -42,9 +42,9 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/zenyway/pbkdf2-sha512/issues"
+    "url": "https://github.com/zenyway/pbkdf2sha512/issues"
   },
-  "homepage": "https://github.com/zenyway/pbkdf2-sha512#readme",
+  "homepage": "https://github.com/zenyway/pbkdf2sha512#readme",
   "dependencies": {
     "pbkdf2": "^3.0.9",
     "randombytes": "^2.0.3",
