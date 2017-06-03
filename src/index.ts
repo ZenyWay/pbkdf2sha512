@@ -13,7 +13,6 @@
  */
 ;
 import { isString, isNumber, isArrayBuffer } from './utils'
-import { __assign as assign } from 'tslib'
 
 export interface Pbkdf2Sha512Factory {
   (config?: Partial<Pbkdf2Sha512Config&Pbkdf2Sha512Opts>): (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha512Digest>
@@ -113,7 +112,7 @@ class Pbkdf2Sha512Class implements Pbkdf2Sha512Spec {
 }
 
 function getPbkdf2Sha512Spec (randombytes: (length: number) => Buffer, val: any): Pbkdf2Sha512Spec {
-  const config = assign({}, val)
+  const config = { ...val }
   const encoding = getEncoding(config.encoding)
   const saltbytes = getSaltBuffer(randombytes, config.salt, encoding)
 
