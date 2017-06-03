@@ -14,9 +14,10 @@ debug.enable('example:*')
 
 const pbkdf2 = getPbkdf2OSha512({
   // generate random 64-byte long salt string, base64-encoded (default)
-  iterations: 8192, // min 8192, default 65536
+  iterations: 8192, // min 8192 (unless `relaxed`), default 65536
   length: 32 // min 32, max 64, default 64
   // digest is always 'sha512'
+  // relaxed defaults to false
 })
 
 const rawpbkdf2 = getPbkdf2OSha512({
@@ -37,7 +38,7 @@ rawpbkdf2('secret passphrase')
 ```
 the files of this example are available [in this repository](./spec/example).
 
-view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.1.0/spec/example/index.html)
+view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.0/spec/example/index.html)
 in the browser console,
 or by cloning this repository and running the following commands from a terminal:
 ```bash
@@ -45,12 +46,12 @@ npm install
 npm run example
 ```
 
-# <a name="api"></a> API v1.1 stable
+# <a name="api"></a> API v1.2 stable
 `ES5` and [`Typescript`](http://www.typescriptlang.org/) compatible.
 coded in `Typescript 2`, transpiled to `ES5`.
 
 for a detailed specification of the API,
-[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.1.0/spec/web/index.html).
+[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.0/spec/web/index.html).
 
 # <a name="contributing"></a> CONTRIBUTING
 see the [contribution guidelines](./CONTRIBUTING.md)

@@ -108,6 +108,27 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
       expect(digest.spec.encoding).toBe('base64')
     })
   })
+  describe('when called with `relaxed: true`', () => { // TODO
+    let config: any
+    let digest: any
+    beforeEach((done) => {
+      config = assign({
+        iterations: 1,
+        relaxed: true
+      }, mock)
+      getPbkdf2Sha512(config)('passphrase')
+      .then(hash => digest = hash)
+      .then(() => setTimeout(done))
+      .catch(err => setTimeout(() => done.fail(err)))
+    })
+    it('accepts any strictly positive iteration count', () => {
+      expect(mock.pbkdf2)
+      .toHaveBeenCalledWith(
+        jasmine.any(Buffer), randombytes, 1, 64, 'sha512', jasmine.any(Function))
+      expect(mock.randombytes).toHaveBeenCalledWith(64)
+      expect(digest.spec.encoding).toBe('base64')
+    })
+  })
 })
 
 describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha512Digest>', () => {

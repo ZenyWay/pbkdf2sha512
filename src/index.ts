@@ -23,6 +23,7 @@ export interface Pbkdf2Sha512Config {
   salt: Buffer|Uint8Array|string|number
   iterations: number
   length: number
+  relaxed: boolean
 }
 
 export interface Pbkdf2Sha512Opts {
@@ -111,17 +112,15 @@ class Pbkdf2Sha512Class implements Pbkdf2Sha512Spec {
   ) {}
 }
 
-function getPbkdf2Sha512Spec (randombytes: (length: number) => Buffer, val: any): Pbkdf2Sha512Spec {
-  const config = { ...val }
+function getPbkdf2Sha512Spec (randombytes: (length: number) => Buffer, opts?: any): Pbkdf2Sha512Spec {
+  const config = { ...opts }
   const encoding = getEncoding(config.encoding)
   const saltbytes = getSaltBuffer(randombytes, config.salt, encoding)
 
   const spec: Pbkdf2Sha512Spec = {
     encoding: encoding,
-    salt: {
-      bytes: saltbytes
-    },
-    iterations: getIterations(config.iterations),
+    salt: { bytes: saltbytes },
+    iterations: getIterations(config.iterations, config.relaxed),
     length: getLength(config.length)
   }
   if (encoding !== 'none') { spec.salt.chars = saltbytes.toString(encoding) }
@@ -154,9 +153,10 @@ function getEncoding (val: any): string {
   : PBKDF2_CONFIG_DEFAULTS.encoding[0]
 }
 
-function getIterations (val: any): number {
-  const iterations = isNumber(val) && val.valueOf()
-  return val >= PBKDF2_CONFIG_DEFAULTS.iterations.min
+function getIterations (val: any, relaxed?: boolean): number {
+  const iterations = isNumber(val) && Math.floor(val.valueOf())
+  const min = !relaxed ? PBKDF2_CONFIG_DEFAULTS.iterations.min : 1
+  return val >= min
   ? iterations
   : PBKDF2_CONFIG_DEFAULTS.iterations.default
 }
