@@ -9,7 +9,8 @@
       "dom"
     ],
     "sourceMap": true,
-    "importHelpers": false,
+    "noEmitHelpers": true,
+    "importHelpers": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": true,

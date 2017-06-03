@@ -13,7 +13,7 @@
  */
 ;
 import getPbkdf2Sha512 from '../src'
-import { __assign as assign } from 'tslib'
+
 let mock: {
   pbkdf2: jasmine.Spy
   randombytes: jasmine.Spy
@@ -60,12 +60,13 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
     let config: any
     let digest: any
     beforeEach((done) => {
-      config = assign({
+      config = {
         encoding: 'ascii',
         salt: Buffer.alloc(32),
         iterations: 8192,
-        length: 32
-      }, mock)
+        length: 32,
+        ...mock
+      }
       getPbkdf2Sha512(config)('passphrase')
       .then(hash => digest = hash)
       .then(() => setTimeout(done))
@@ -89,12 +90,13 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
     let config: any
     let digest: any
     beforeEach((done) => {
-      config = assign({
+      config = {
         encoding: 'foo',
         salt: Buffer.alloc(31),
         iterations: 8191,
-        length: 31
-      }, mock)
+        length: 31,
+        ...mock
+      }
       getPbkdf2Sha512(config)('passphrase')
       .then(hash => digest = hash)
       .then(() => setTimeout(done))
@@ -112,10 +114,11 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
     let config: any
     let digest: any
     beforeEach((done) => {
-      config = assign({
+      config = {
         iterations: 1,
-        relaxed: true
-      }, mock)
+        relaxed: true,
+        ...mock
+      }
       getPbkdf2Sha512(config)('passphrase')
       .then(hash => digest = hash)
       .then(() => setTimeout(done))
@@ -136,9 +139,10 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
     let config: any
     let digests: any
     beforeEach((done) => {
-      config = assign({
-        encoding: 'ascii'
-      }, mock)
+      config = {
+        encoding: 'ascii',
+        ...mock
+      }
       const buf = Buffer.from('passphrase', 'ascii')
       const arr = new Uint8Array(buf.buffer)
       const args = [ 'passphrase', buf, arr ]
@@ -166,9 +170,10 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
     let config: any
     let digests: any
     beforeEach((done) => {
-      config = assign({
-        encoding: 'none'
-      }, mock)
+      config = {
+        encoding: 'none',
+        ...mock
+      }
       const buf = Buffer.from('passphrase', 'ascii')
       const arr = new Uint8Array(buf.buffer)
       const args = [ 'passphrase', buf, arr ]
@@ -196,9 +201,10 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
     let config: any
     let errors: any
     beforeEach((done) => {
-      config = assign({
-        encoding: 'ascii'
-      }, mock)
+      config = {
+        encoding: 'ascii',
+        ...mock
+      }
       const args = [ null, undefined, 42, [], {} ]
       const pbkdf2 = <any>getPbkdf2Sha512(config)
       Promise.all(args.map(arg => pbkdf2(arg).catch((err: any) => err)))

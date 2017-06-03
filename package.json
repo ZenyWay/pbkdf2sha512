@@ -1,6 +1,6 @@
 {
   "name": "pbkdf2sha512",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "node crypto's async pbkdf2 promisified and with sane defaults",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -47,7 +47,8 @@
   "homepage": "https://github.com/zenyway/pbkdf2sha512#readme",
   "dependencies": {
     "pbkdf2": "^3.0.12",
-    "randombytes": "^2.0.4"
+    "randombytes": "^2.0.4",
+    "tslib": "^1.7.1"
   },
   "devDependencies": {
     "@types/debug": "0.0.29",
