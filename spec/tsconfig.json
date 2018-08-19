@@ -13,8 +13,8 @@
       "jasmine"
     ],
     "sourceMap": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
+    "noEmitHelpers": false,
+    "importHelpers": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": true,

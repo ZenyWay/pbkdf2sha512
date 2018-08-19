@@ -1,7 +1,7 @@
 {
   "name": "pbkdf2sha512",
-  "version": "1.2.3",
-  "description": "node crypto's async pbkdf2 promisified and with sane defaults",
+  "version": "1.2.4",
+  "description": "node crypto's async pbkdf2 promisified and with sane defaults. ES5. TypeScript support. 1.3kb excl. deps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -12,8 +12,8 @@
     "example:debug": "concurrently --kill-others \"npm run example:bundle:watch\" \"npm run example:serve\"",
     "example:serve": "http-server -c-1 -i -e html -o -p 6510 spec/example",
     "preexample:bundle": "rimraf spec/example/*.js",
-    "example:bundle": "browserify spec/example/index.ts -p [ tsify -p spec/example ] --exclude pbkdf2 --exclude randombytes --exclude buffer --exclude tslib -t uglifyify -p bundle-collapser/plugin -p [ common-shakeify -v ] | uglifyjs -c -m toplevel -o spec/example/index.js",
-    "example:bundle:watch": "watchify spec/example/index.ts -p [ tsify -p spec/example ] --exclude pbkdf2 --exclude randombytes --exclude buffer --exclude tslib -o spec/example/index.js --debug -v",
+    "example:bundle": "browserify spec/example/index.ts -p [ tsify -p spec/example ] --exclude pbkdf2 --exclude randombytes --exclude buffer -t uglifyify -p bundle-collapser/plugin -p [ common-shakeify -v ] | uglifyjs -c -m toplevel -o spec/example/index.js",
+    "example:bundle:watch": "watchify spec/example/index.ts -p [ tsify -p spec/example ] --exclude pbkdf2 --exclude randombytes --exclude buffer -o spec/example/index.js --debug -v",
     "prepublish": "npm run dist",
     "pretest": "mkdirp spec/reports && rimraf spec/reports/*",
     "test": "karma start spec/karma.conf.js --single-run",
@@ -28,7 +28,7 @@
     "test:web:serve": "http-server -c-1 -o -p 6510 spec/web",
     "pretest:web": "rimraf spec/web/*.js",
     "test:web": "npm run test:web:bundle && npm run test:web:serve",
-    "test:web:bundle": "browserify spec/*.spec.ts -p [ tsify -p spec ] --exclude pbkdf2 --exclude randombytes --exclude buffer --exclude tslib -t uglifyify -p bundle-collapser/plugin -p [ common-shakeify -v ] | uglifyjs -c -m toplevel -o spec/web/index.spec.js",
+    "test:web:bundle": "browserify spec/*.spec.ts -p [ tsify -p spec ] --exclude pbkdf2 --exclude randombytes --exclude buffer -t uglifyify -p bundle-collapser/plugin -p [ common-shakeify -v ] | uglifyjs -c -m toplevel -o spec/web/index.spec.js",
     "uglify": "npm run uglify:index && npm run uglify:utils",
     "uglify:index": "uglifyjs build/index.js -c toplevel -m toplevel --define process.env.NODE_ENV=\\\"production\\\" -o dist/index.js",
     "uglify:utils": "uglifyjs build/utils.js -c toplevel -m toplevel --define process.env.NODE_ENV=\\\"production\\\" -o dist/utils.js"
@@ -85,7 +85,6 @@
     "rimraf": "^2.6.2",
     "standard": "^11.0.1",
     "tsify": "^4.0.0",
-    "tslib": "^1.9.3",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^7.1.0",
     "typescript": "^3.0.1",
