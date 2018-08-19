@@ -1,5 +1,7 @@
-/*
- * Copyright 2017 Stephane M. Catala
+/**
+ * Copyright 2018 Stephane M. Catala
+ * @author  Stephane M. Catala
+ * @license Apache@2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * Limitations under the License.
  */
-;
+//
 import getPbkdf2OSha512 from '../../src'
-import debug = require('debug')
-debug.enable('example:*')
+import log from './console'
 
 const pbkdf2 = getPbkdf2OSha512({
   // generate random 64-byte long salt string, base64-encoded (default)
@@ -29,12 +30,12 @@ const rawpbkdf2 = getPbkdf2OSha512({
   length: 32
 })
 
-debug('example:')('digest passphrase...')
+log('example:')('digest passphrase...')
 
 pbkdf2('secret passphrase')
-.then(debug('example:digest:'))
+.then(log('example:digest:'))
 // { value: "...", spec: { encoding: "base64", salt: "...", iterations: 16384, length: 64, hmac: "sha512" }}
 
 rawpbkdf2('secret passphrase')
-.then(debug('example:raw-digest:'))
+.then(log('example:raw-digest:'))
 // { value: Buffer, spec: { encoding: "none", salt: Buffer, iterations: 8192, length: 32, hmac: "sha512" }}

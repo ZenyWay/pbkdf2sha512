@@ -1,5 +1,7 @@
-/*
- * Copyright 2017 Stephane M. Catala
+/**
+ * Copyright 2018 Stephane M. Catala
+ * @author  Stephane M. Catala
+ * @license Apache@2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,12 +64,7 @@ module.exports = function (config) {
     },
     browserify: { // https://github.com/nikku/karma-browserify#plugins
       debug: true,
-      plugin: [ [ 'tsify' ] ] /*,
-      configure: function (bundle) {
-        bundle.on('prebundle', function () {
-          bundle.require('_cut_', { expose: '' }) // stub dependencies
-        })
-      } */
+      plugin: [ [ 'tsify', { project: 'spec' } ] ]
     },
     reporters: [ // 'progress' | 'dots' | 'kjhtml' | 'junit' | 'spec' | ' coverage'
       'spec', 'kjhtml', 'junit'

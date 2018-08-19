@@ -5,6 +5,7 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/ZenyWay/pbkdf2sha512.svg)](https://gemnasium.com/github.com/ZenyWay/pbkdf2sha512)
 
 node crypto's async pbkdf2 promisified and with sane defaults.
+ES5 code with TypeScript support. 1kb gzip.
 
 # <a name="example"></a> example
 ```ts
@@ -38,7 +39,7 @@ rawpbkdf2('secret passphrase')
 ```
 the files of this example are available [in this repository](./spec/example).
 
-view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.1/spec/example/index.html)
+view a [live version of this example in the browser console](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.2/spec/example/index.html)
 in the browser console,
 or by cloning this repository and running the following commands from a terminal:
 ```bash
@@ -48,16 +49,16 @@ npm run example
 
 # <a name="api"></a> API v1.2 stable
 `ES5` and [`Typescript`](http://www.typescriptlang.org/) compatible.
-coded in `Typescript 2`, transpiled to `ES5`.
+coded in `Typescript 3`, transpiled to `ES5`.
 
 for a detailed specification of the API,
-[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.1/spec/web/index.html).
+[run the unit tests in your browser](https://cdn.rawgit.com/ZenyWay/pbkdf2sha512/v1.2.2/spec/web/index.html).
 
 # <a name="contributing"></a> CONTRIBUTING
 see the [contribution guidelines](./CONTRIBUTING.md)
 
 # <a name="license"></a> LICENSE
-Copyright 2017 Stéphane M. Catala
+Copyright 2018 Stéphane M. Catala
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

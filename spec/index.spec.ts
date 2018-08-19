@@ -1,5 +1,8 @@
-/*
- * Copyright 2017 Stephane M. Catala
+'use strict' /* eslint-env jasmine */
+/**
+ * Copyright 2018 Stephane M. Catala
+ * @author  Stephane M. Catala
+ * @license Apache@2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * Limitations under the License.
  */
-;
+//
 import getPbkdf2Sha512 from '../src'
 
 let mock: {
@@ -24,8 +27,14 @@ let randombytes: Buffer
 beforeEach(() => {
   digest = Buffer.alloc(64)
   randombytes = Buffer.alloc(64)
-  function fakePbkdf2 (password: string|Uint8Array, salt: string|Uint8Array, iterations: number,
-  length: number, hmac: string, callback: (err: any, digest: Uint8Array) => void): void {
+  function fakePbkdf2 (
+    password: string | Uint8Array,
+    salt: string | Uint8Array,
+    iterations: number,
+    length: number,
+    hmac: string,
+    callback: (err: any, digest: Uint8Array) => void
+  ): void {
     callback(null, digest)
   }
   mock = {
@@ -80,7 +89,8 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
         config.iterations,
         config.length,
         'sha512',
-        jasmine.any(Function))
+        jasmine.any(Function)
+      )
       expect(mock.randombytes).not.toHaveBeenCalled()
       expect(digest.spec.encoding).toBe(config.encoding)
     })
@@ -105,7 +115,14 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
     it('configures the returned pbkdf2 function of each invalid property to its default value',
     () => {
       expect(mock.pbkdf2)
-      .toHaveBeenCalledWith(jasmine.any(Buffer), randombytes, 65536, 64, 'sha512', jasmine.any(Function))
+      .toHaveBeenCalledWith(
+        jasmine.any(Buffer),
+        randombytes,
+        65536,
+        64,
+        'sha512',
+        jasmine.any(Function)
+      )
       expect(mock.randombytes).toHaveBeenCalledWith(64)
       expect(digest.spec.encoding).toBe('base64')
     })
@@ -127,7 +144,13 @@ describe('getPbkdf2Sha512 (config?: Partial<Pbkdf2Sha512Config>): ' +
     it('accepts any strictly positive iteration count', () => {
       expect(mock.pbkdf2)
       .toHaveBeenCalledWith(
-        jasmine.any(Buffer), randombytes, 1, 64, 'sha512', jasmine.any(Function))
+        jasmine.any(Buffer),
+        randombytes,
+        1,
+        64,
+        'sha512',
+        jasmine.any(Function)
+      )
       expect(mock.randombytes).toHaveBeenCalledWith(64)
       expect(digest.spec.encoding).toBe('base64')
     })
@@ -178,8 +201,7 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
       const arr = new Uint8Array(buf.buffer)
       const args = [ 'passphrase', buf, arr ]
       const pbkdf2 = getPbkdf2Sha512(config)
-      Promise.all(args.map(arg =>
-        pbkdf2(arg)))
+      Promise.all(args.map(arg => pbkdf2(arg)))
       .then(hashes => digests = hashes)
       .then(() => setTimeout(done))
       .catch(err => setTimeout(() => done.fail(err)))
@@ -206,16 +228,17 @@ describe('pbkdf2Sha512 (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha
         ...mock
       }
       const args = [ null, undefined, 42, [], {} ]
-      const pbkdf2 = <any>getPbkdf2Sha512(config)
+      const pbkdf2 = getPbkdf2Sha512(config) as any
       Promise.all(args.map(arg => pbkdf2(arg).catch((err: any) => err)))
       .then(errs => errors = errs)
       .then(() => setTimeout(done))
       .catch(err => setTimeout(() => done.fail(err)))
     })
     it('throws an "invalid arguments" TypeError', () => {
-      errors
-      .every((err: any) => expect(err).toEqual(jasmine.any(TypeError))
-      && expect(err.message).toBe('invalid argument'))
+      errors.every(
+        (err: any) => expect(err).toEqual(jasmine.any(TypeError))
+          && expect(err.message).toBe('invalid argument')
+      )
     })
   })
 })

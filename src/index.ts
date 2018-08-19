@@ -1,5 +1,7 @@
-/*
- * Copyright 2017 Stephane M. Catala
+/**
+ * Copyright 2018 Stephane M. Catala
+ * @author  Stephane M. Catala
+ * @license Apache@2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,35 +13,43 @@
  * See the License for the specific language governing permissions and
  * Limitations under the License.
  */
-;
+//
 import { isString, isNumber, isArrayBuffer } from './utils'
 
 export interface Pbkdf2Sha512Factory {
-  (config?: Partial<Pbkdf2Sha512Config&Pbkdf2Sha512Opts>): (password: Buffer|Uint8Array|string) => Promise<Pbkdf2sha512Digest>
+  (
+    config?: Partial<Pbkdf2Sha512Config & Pbkdf2Sha512Opts>
+  ): (password: Buffer | Uint8Array | string) => Promise<Pbkdf2sha512Digest>
 }
 
 export interface Pbkdf2Sha512Config {
   encoding: string
-  salt: Buffer|Uint8Array|string|number
+  salt: Buffer | Uint8Array | string | number
   iterations: number
   length: number
   relaxed: boolean
 }
 
 export interface Pbkdf2Sha512Opts {
-  pbkdf2: (password: string|Buffer, salt: string|Buffer, iterations: number,
-  length: number, digest: string, callback: (err: any, digest: Buffer) => void) => void
+  pbkdf2: (
+    password: string | Buffer,
+    salt: string | Buffer,
+    iterations: number,
+    length: number,
+    digest: string,
+    callback: (err: any, digest: Buffer) => void
+  ) => void
   randombytes: (length: number) => Buffer
 }
 
 export interface Pbkdf2sha512Digest {
-  value: Buffer|string
+  value: Buffer | string
   spec: Pbkdf2sha512DigestSpec
 }
 
 export interface Pbkdf2sha512DigestSpec {
   encoding: string
-  salt: Buffer|string
+  salt: Buffer | string
   iterations: number
   length: number
   hmac: 'sha512'
@@ -60,15 +70,19 @@ const PBKDF2_CONFIG_DEFAULTS = {
 }
 
 class Pbkdf2Sha512Class implements Pbkdf2Sha512Spec {
-  static getKdf: Pbkdf2Sha512Factory =
-  function (config?: Partial<Pbkdf2Sha512Config&Pbkdf2Sha512Opts>) {
+  static getKdf: Pbkdf2Sha512Factory = function (
+    config?: Partial<Pbkdf2Sha512Config & Pbkdf2Sha512Opts>
+  ) {
     const pbkdf2 = config && config.pbkdf2 || require('pbkdf2').pbkdf2
     const randombytes = config && config.randombytes || require('randombytes')
     const spec = getPbkdf2Sha512Spec(randombytes, config)
-    const pbkdf2sha512 =
-    new Pbkdf2Sha512Class(pbkdf2, spec.encoding, spec.salt, spec.iterations, spec.length)
+    const pbkdf2sha512 = new Pbkdf2Sha512Class(
+      pbkdf2, spec.encoding, spec.salt, spec.iterations, spec.length
+    )
 
-    return function (password: Buffer|Uint8Array|string): Promise<Pbkdf2sha512Digest> {
+    return function (
+      password: Buffer | Uint8Array | string
+    ): Promise<Pbkdf2sha512Digest> {
       const pwbytes = toBufferIfUintArray(toBufferIfString(password, 'utf8'))
 
       return Buffer.isBuffer(pwbytes)
@@ -87,24 +101,35 @@ class Pbkdf2Sha512Class implements Pbkdf2Sha512Spec {
     }
 
     return new Promise<Pbkdf2sha512Digest>((resolve, reject) => {
-      this.pbkdf2(password, this.salt.bytes, this.iterations, this.length, this.hmac,
-      (err: any, digest: Buffer) => {
-        if (err) { reject(err) }
-        const hash: Pbkdf2sha512Digest = {
-          value: this.encoding === 'none' ? digest : digest.toString(this.encoding),
-          spec: spec
+      this.pbkdf2(
+        password,
+        this.salt.bytes,
+        this.iterations,
+        this.length,
+        this.hmac,
+        (err: any, digest: Buffer) => {
+          if (err) { reject(err) }
+          const value = this.encoding === 'none'
+          ? digest
+          : digest.toString(this.encoding)
+
+          const hash: Pbkdf2sha512Digest = { value, spec }
+          resolve(hash)
         }
-        resolve(hash)
-      })
+      )
     })
   }
 
   readonly hmac = 'sha512'
 
   private constructor (
-    readonly pbkdf2: (password: string|Buffer, salt: string|Buffer,
-    iterations: number, length: number, hmac: string,
-    callback: (err: any, digest: Buffer) => void) => void,
+    readonly pbkdf2: (
+      password: string | Buffer,
+      salt: string | Buffer,
+      iterations: number,
+      length: number,
+      hmac: string,
+      callback: (err: any, digest: Buffer) => void) => void,
     readonly encoding: string,
     readonly salt: { bytes: Buffer, chars?: string },
     readonly iterations: number,
@@ -112,7 +137,9 @@ class Pbkdf2Sha512Class implements Pbkdf2Sha512Spec {
   ) {}
 }
 
-function getPbkdf2Sha512Spec (randombytes: (length: number) => Buffer, opts?: any): Pbkdf2Sha512Spec {
+function getPbkdf2Sha512Spec (
+  randombytes: (length: number) => Buffer, opts?: any
+): Pbkdf2Sha512Spec {
   const config = { ...opts }
   const encoding = getEncoding(config.encoding)
   const saltbytes = getSaltBuffer(randombytes, config.salt, encoding)
@@ -127,14 +154,22 @@ function getPbkdf2Sha512Spec (randombytes: (length: number) => Buffer, opts?: an
   return spec
 }
 
-function getSaltBuffer (randombytes: (length: number) => Buffer, val: any, encoding: string): Buffer {
-  const salt = toBufferIfUintArray(toRandomBufferIfNumber(randombytes, toBufferIfString(val, encoding)))
+function getSaltBuffer (
+  randombytes: (length: number) => Buffer,
+  val: any,
+  encoding: string
+): Buffer {
+  const salt = toBufferIfUintArray(
+    toRandomBufferIfNumber(randombytes, toBufferIfString(val, encoding))
+  )
   return Buffer.isBuffer(salt) && (salt.length >= PBKDF2_CONFIG_DEFAULTS.salt.min)
   ? Buffer.from(salt)
   : randombytes(PBKDF2_CONFIG_DEFAULTS.salt.default)
 }
 
-function toRandomBufferIfNumber (randombytes: (length: number) => Buffer, val: any): any {
+function toRandomBufferIfNumber (
+  randombytes: (length: number) => Buffer, val: any
+): any {
   return isNumber(val) ? randombytes(val.valueOf()) : val
 }
 
